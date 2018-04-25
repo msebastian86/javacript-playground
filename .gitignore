@@ -57,3 +57,30 @@ typings/
 # dotenv environment variables file
 .env
 
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+#sublime project files
+*.sublime-project
+*.sublime-workspace
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+# compiled output
+/dist
+/dist-server
+/tmp
+/out-tsc
