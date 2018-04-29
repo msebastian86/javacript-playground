@@ -70,20 +70,30 @@
 
     <!-- header end -->
 
-    <main role="main">
+    <main role="main" class="container">
 
       <h1>HELLO FROM HTML BOILERPLATE</h1>
 
       <!-- example -->
 
       <section class="example">
-		<div id="main"></div>
+		<div id="main" class="row"></div>
 
-		<form id="test-form" action="" method="post">
-			<input type="text" id="name" name="name" placeholder="name">
-			<br/><input type="email" id="email" name="email" placeholder="email">
-			<br/><input type="tel" id="phone" name="phone" placeholder="phone">
-			<br/><input type="submit">
+		<div id="load-stuff" class="mt-2 mb-3"></div>
+
+		<form id="test-form" class="form mt-2 mb-2">
+			<div class="form-group">
+				<input type="text" id="name" name="name" placeholder="name">
+			</div>
+			<div class="form-group">
+				<input type="email" id="email" name="email" placeholder="email">
+			</div>
+			<div class="form-group">
+				<input type="tel" id="phone" name="phone" placeholder="phone" class="mb-2">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
 		</form>
         
 
@@ -98,7 +108,6 @@
     <footer>
 
       <address>
-        2018 (v.2.0)
       </address>
 
     </footer>

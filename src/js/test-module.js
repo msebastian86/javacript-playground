@@ -11,10 +11,9 @@ function insertUsers(results) {
         console.log(`${result.first_name}`);
         console.log(`${result.avatar}`);
 
-        var main = document.getElementById('main');
+        var main = $('#main');
 
-        main.insertAdjacentHTML('afterend', `<p>${result.first_name}</p><img src="${result.avatar}" class="rounded-circle ml-1 mr-1 mb-2"/>`);
-
+        main.append(`<div class="col-sm-4 text-center">${result.first_name}<br/><img src="${result.avatar}" class="rounded-circle ml-1 mr-1 mb-2"/></div>`);
 
     })
 }
@@ -38,11 +37,8 @@ function getPollResultsFromServer(pollName){
 
 getPollResultsFromServer("somthing").then(function(results){
 	insertUsers(results);
-
 }).catch(function(err){
-
 	alert(` ${err} dfsfsd`);
-
 });
 
 
@@ -52,7 +48,7 @@ getPollResultsFromServer("somthing").then(function(results){
 let names = ["stefan", "zbychu", "mietek"];
 
 for (let name of names){
-	console.log(name);
+	// console.log(name);
 }
 
 // for of nie zadziala na obiektach
@@ -64,32 +60,37 @@ let cats = {
 
 // [] i ... wrzuca zawartość do arraya
 let values = [...cats.name1];
-console.log(values);
+// console.log(values);
 
 
 
 // ------------------ forms i ajax
 
 
-$(function() {
-	$('#test-form').submit(function(event) {
-		event.preventDefault(); // Prevent the form from submitting via the browser
-		var form = $(this);
-		var formData = {};
+$('#test-form').submit(function(event) {
+	event.preventDefault(); // Prevent the form from submitting via the browser
+	var form = $(this);
+	var formSerialize = form.serializeArray();
 
-		
-		// console.log(form);
+	var formData = {};
 
-		$.ajax({
-			type: 'GET',
-			// url: form.attr('action'), // gdzie wysylamy
-			dataType: 'json',
-			data: form
-			// data: form
-		}).done(function(data) {
-			console.log(data);
-		}).fail(function(data) {
-		// Optionally alert the user of an error here...
-		});
+	$(formSerialize).each(function(index, obj){
+	    formData[obj.name] = obj.value;
+	});
+
+	$.ajax({
+		type: 'GET',
+		beforeSend: function() {
+			$("#load-stuff").html(`<div class="load-box"><p>loading stuff</p><p>this definietly need some styling ;)</p></div>`);
+		}
+
+	}).done(function(data) {
+
+		setTimeout(function(){
+			$('#load-stuff').find('.load-box').html(`Hello mister ${formData.name}, ur email: ${formData.email}, and ur phone: ${formData.phone} `);
+		}, 1000);
+
+	}).fail(function(data) {
+
 	});
 });
