@@ -2,6 +2,32 @@ module.exports = {
 	hello: 'world'
 };
 
+
+var dataTekst = [];
+var dataKolor = [];
+var dataLiczba = [];
+
+var wykresData = document.querySelectorAll('#wykres-data>li');
+
+for (var i = 0; i < wykresData.length; i++) {
+    dataTekst.push(wykresData[i].getAttribute("data-tekst"));
+    dataKolor.push(wykresData[i].getAttribute("data-kolor"));
+    dataLiczba.push(wykresData[i].getAttribute("data-liczba"));
+
+}
+
+console.log('all:' + wykresData);
+
+var dataTekstQuoted = "'" + dataTekst.join("','") + "'";
+var dataKolorQuoted = "'" + dataKolor.join("','") + "'";
+var dataLiczbaQuoted = "'" + dataLiczba.join("','") + "'";
+
+
+console.log('sss ' + dataTekstQuoted);
+console.log('sss ' + dataKolorQuoted);
+console.log('sss ' + dataLiczbaQuoted);
+
+
 // ------------------ PROMISES
 
 function insertUsers(results) {
@@ -93,3 +119,34 @@ $(function() {
 		});
 	});
 });
+
+let kontenerTextu = document.querySelector('body');
+let text = document.querySelector('.text-moving')
+let walk = 100; //px
+
+function shadow(e){
+	const { offsetWidth: width, offsetHeight: height } = kontenerTextu;
+	// same as upper
+	// const width = kontenerTextu.offserWidth;
+	// const height = kontenerTextu.offserWidth;
+
+	let { offsetX: x, offsetY: y} = e;
+
+	if (this !== e.target) {
+		x = x + e.target.offsetLeft;
+		y = y + e.target.offsetTop;
+	}
+
+	let xWalk = Math.round((x / width * walk) - (walk / 2));
+	let yWalk = Math.round((y / height * walk) - (walk / 2));
+
+	text.style.textShadow = `
+		${xWalk}px ${yWalk}px 3px rgba(0,0,0,0.2)
+	`;
+	text.style.transition = `all 50ms ease`;
+
+	console.log(xWalk, yWalk);
+
+}
+
+kontenerTextu.addEventListener('mousemove', shadow);
